@@ -1,0 +1,211 @@
+************************************************************************
+Requested:  root ... 
+ Setting up [4mroot 6.20.06-x86_64-centos7-gcc8-opt[0m ... 
+  ROOT is from lcgenv -p LCG_97a x86_64-centos7-gcc8-opt ROOT
+>>>>>>>>>>>>>>>>>>>>>>>>> Information for user <<<<<<<<<<<<<<<<<<<<<<<<<
+ root:
+   Tip for _this_ standalone ROOT and grid (ie prun) submission:
+    avoid --athenaTag if you do not need athena
+    use --rootVer=6.20.06 --cmtConfig=x86_64-centos7-gcc8-opt
+ root:
+   Note this ROOT from lcgenv sets up a long list of library paths.
+   This may slow down executables; they look at each library path item.
+   A faster alternative - setup the entire LCG stack with views:
+    lsetup "views LCG_97a x86_64-centos7-gcc8-opt"
+************************************************************************
+
+Processing runLooper_CaloScoreWP.C("/eos/home-p/ptong/user.ptong.UseCaloScore.ttbar_output.root/output_ttbar_CaloScore.root","output_ttbar_CaloScore_WP0_rebin_prompt.root", 0)...
+----------------------------------------
+CaloMuonScore WP0 results:
+----------------------------------------
+Total number of events processed: 1.01583e+08
+Total number of muons: 758889
+Selected muons by working point (numbers in parenthesis include bad muon veto):
+--------------------------
+Tight:             0 (0)
+Medium:            0 (0)
+Loose:             657927 (657927)
+VeryLoose:         758889 (758889)
+HighPt:            0 (0)
+LowPt:             0 (0)
+LowPtMVA:          0 (0)
+NoSelection:       758889 (758889)
+RebuiltCaloScore:  665921 (665921)
+--------------------------
+Selected muons by type and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                    combined         stand-alone         segment-tagged         calo-tagged         forward         
+All muons:             0                   0                   0                   758889              0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                0 (0)               0 (0)               0 (0)               657927 (657927)     0 (0)               
+VeryLoose:            0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+RebuiltCaloScore:     0 (0)               0 (0)               0 (0)               665921 (665921)     0 (0)               
+---------------------------------------------------------------------------------------
+Selected muons by truth classification and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                      Prompt           Non-isolated           Hadron           Background           Other           
+All muons:             758889              0                   0                   0                   0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                657927 (657927)     0 (0)               0 (0)               0 (0)               0 (0)               
+VeryLoose:            758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+RebuiltCaloScore:     665921 (665921)     0 (0)               0 (0)               0 (0)               0 (0)               
+---------------------------------------------------------------------------------------
+Muons classified as unknown by MCTC: 0
+---------------------------------------------------------------------------------------
+
+Processing runLooper_CaloScoreWP.C("/eos/home-p/ptong/user.ptong.UseCaloScore.ttbar_output.root/output_ttbar_CaloScore.root","output_ttbar_CaloScore_WP1_rebin_prompt.root", 1)...
+----------------------------------------
+CaloMuonScore WP0 results:
+----------------------------------------
+Total number of events processed: 1.01583e+08
+Total number of muons: 758889
+Selected muons by working point (numbers in parenthesis include bad muon veto):
+--------------------------
+Tight:             0 (0)
+Medium:            0 (0)
+Loose:             693972 (693972)
+VeryLoose:         758889 (758889)
+HighPt:            0 (0)
+LowPt:             0 (0)
+LowPtMVA:          0 (0)
+NoSelection:       758889 (758889)
+RebuiltCaloScore:  726368 (726368)
+--------------------------
+Selected muons by type and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                    combined         stand-alone         segment-tagged         calo-tagged         forward         
+All muons:             0                   0                   0                   758889              0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                0 (0)               0 (0)               0 (0)               693972 (693972)     0 (0)               
+VeryLoose:            0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+RebuiltCaloScore:     0 (0)               0 (0)               0 (0)               726368 (726368)     0 (0)               
+---------------------------------------------------------------------------------------
+Selected muons by truth classification and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                      Prompt           Non-isolated           Hadron           Background           Other           
+All muons:             758889              0                   0                   0                   0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                693972 (693972)     0 (0)               0 (0)               0 (0)               0 (0)               
+VeryLoose:            758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+RebuiltCaloScore:     726368 (726368)     0 (0)               0 (0)               0 (0)               0 (0)               
+---------------------------------------------------------------------------------------
+Muons classified as unknown by MCTC: 0
+---------------------------------------------------------------------------------------
+
+Processing runLooper_CaloScoreWP.C("/eos/home-p/ptong/user.ptong.UseCaloScore.ttbar_output.root/output_ttbar_CaloScore.root","output_ttbar_CaloScore_WP2_rebin_prompt.root", 2)...
+----------------------------------------
+CaloMuonScore WP0 results:
+----------------------------------------
+Total number of events processed: 1.01583e+08
+Total number of muons: 758889
+Selected muons by working point (numbers in parenthesis include bad muon veto):
+--------------------------
+Tight:             0 (0)
+Medium:            0 (0)
+Loose:             693972 (693972)
+VeryLoose:         758889 (758889)
+HighPt:            0 (0)
+LowPt:             0 (0)
+LowPtMVA:          0 (0)
+NoSelection:       758889 (758889)
+RebuiltCaloScore:  700596 (700596)
+--------------------------
+Selected muons by type and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                    combined         stand-alone         segment-tagged         calo-tagged         forward         
+All muons:             0                   0                   0                   758889              0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                0 (0)               0 (0)               0 (0)               693972 (693972)     0 (0)               
+VeryLoose:            0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+RebuiltCaloScore:     0 (0)               0 (0)               0 (0)               700596 (700596)     0 (0)               
+---------------------------------------------------------------------------------------
+Selected muons by truth classification and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                      Prompt           Non-isolated           Hadron           Background           Other           
+All muons:             758889              0                   0                   0                   0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                693972 (693972)     0 (0)               0 (0)               0 (0)               0 (0)               
+VeryLoose:            758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+RebuiltCaloScore:     700596 (700596)     0 (0)               0 (0)               0 (0)               0 (0)               
+---------------------------------------------------------------------------------------
+Muons classified as unknown by MCTC: 0
+---------------------------------------------------------------------------------------
+
+Processing runLooper_CaloScoreWP.C("/eos/home-p/ptong/user.ptong.UseCaloScore.ttbar_output.root/output_ttbar_CaloScore.root","output_ttbar_CaloScore_WP3_rebin_prompt.root", 3)...
+----------------------------------------
+CaloMuonScore WP0 results:
+----------------------------------------
+Total number of events processed: 1.01583e+08
+Total number of muons: 758889
+Selected muons by working point (numbers in parenthesis include bad muon veto):
+--------------------------
+Tight:             0 (0)
+Medium:            0 (0)
+Loose:             693972 (693972)
+VeryLoose:         758889 (758889)
+HighPt:            0 (0)
+LowPt:             0 (0)
+LowPtMVA:          0 (0)
+NoSelection:       758889 (758889)
+RebuiltCaloScore:  695088 (695088)
+--------------------------
+Selected muons by type and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                    combined         stand-alone         segment-tagged         calo-tagged         forward         
+All muons:             0                   0                   0                   758889              0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                0 (0)               0 (0)               0 (0)               693972 (693972)     0 (0)               
+VeryLoose:            0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          0 (0)               0 (0)               0 (0)               758889 (758889)     0 (0)               
+RebuiltCaloScore:     0 (0)               0 (0)               0 (0)               695088 (695088)     0 (0)               
+---------------------------------------------------------------------------------------
+Selected muons by truth classification and working point (numbers in parenthesis include bad muon veto):
+---------------------------------------------------------------------------------------
+                      Prompt           Non-isolated           Hadron           Background           Other           
+All muons:             758889              0                   0                   0                   0                   
+Tight:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Medium:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+Loose:                693972 (693972)     0 (0)               0 (0)               0 (0)               0 (0)               
+VeryLoose:            758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+HighPt:               0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPt:                0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+LowPtMVA:             0 (0)               0 (0)               0 (0)               0 (0)               0 (0)               
+NoSelection:          758889 (758889)     0 (0)               0 (0)               0 (0)               0 (0)               
+RebuiltCaloScore:     695088 (695088)     0 (0)               0 (0)               0 (0)               0 (0)               
+---------------------------------------------------------------------------------------
+Muons classified as unknown by MCTC: 0
+---------------------------------------------------------------------------------------

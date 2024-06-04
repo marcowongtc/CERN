@@ -1,0 +1,376 @@
+{
+
+  gROOT->LoadMacro("../histos.cpp+");
+
+  //Set ATLAS style
+  
+
+  string path = "../output/submitDir_fullRun_new_merged/";
+
+  string histoname = "scaled/hMu_mt_off";
+    
+ 
+  Bool_t rebin = true;
+  Int_t nRebin = 2;
+  Bool_t QCDfromData = true;
+  Bool_t drawDataOverMC = true;
+
+  Bool_t drawWp = false;
+  Bool_t WstarSwitch = true;
+
+  TH1* dijet;
+  if (QCDfromData)
+    dijet = (TH1*)(new TFile("../QCDfromData.root"))->Get("hMu_NonIso_mt_withMETcut"); //MuLoose_DphiNeutrinoMuon_final"); //hMu_mt_isoetmisssig_off");
+
+  
+  histos myHists(histoname,path,false);
+  
+  //Scale MC to lumi
+  myHists.scale(); 
+
+  //scale factor from MET fit
+  myHists.scale(0.893098);
+
+  TH1* data = myHists.data;
+
+  // //Generate pseudo-data
+  // TRandom* rnd = new TRandom3(0);
+
+  // data->Reset();
+  // for (Int_t i = 0; i < data->GetNbinsX(); i++) {
+  //   data->SetBinContent(i+1,0.0); //rnd->Poisson(myHists.totalMC->GetBinContent(i+1)));
+  //   data->SetBinError(i+1,TMath::Sqrt(data->GetBinContent(i+1)));
+  // }
+
+  TH1* W = myHists.W;
+  TH1* Z = myHists.Z;
+  TH1* diboson = myHists.diboson;
+  TH1* ttbar = myHists.ttbar;
+  TH1* singleTop = myHists.singleTop;
+  //if (!QCDfromData) dijet;
+  TH1* EW = myHists.totalEW;
+  
+  TH1* totalSM = myHists.totalMC;
+
+
+  //scale MC to data
+  //myHists.scale(myHists.data->Integral(0,myHists.data->GetNbinsX()+1) / myHists.totalMC->Integral(0,myHists.totalMC->GetNbinsX()+1)); 
+
+  // TH1* Wp500 = myHists.Wp500;
+  // TH1* Wp1000 = myHists.Wp1000;
+  // TH1* Wp3000 = myHists.Wp3000;
+
+  // if (WstarSwitch) {
+  //   Wp500 = myHists.Wsmunu500;
+  //   Wp1000 = myHists.Wsmunu1000;
+  //   Wp3000 = myHists.Wsmunu3000;
+  // }
+
+  if (rebin) {
+    W->Rebin(nRebin);
+    Z->Rebin(nRebin);
+    diboson->Rebin(nRebin);
+    ttbar->Rebin(nRebin);
+    singleTop->Rebin(nRebin);
+    //if (!QCDfromData) dijet->Rebin(nRebin);
+    EW->Rebin(nRebin);
+    totalSM->Rebin(nRebin);
+    data->Rebin(nRebin);
+    
+
+    if (QCDfromData) dijet->Rebin(nRebin); // <-----
+
+    if (drawWp) {
+      Wp500->Rebin(nRebin);
+      Wp1000->Rebin(nRebin);
+      Wp3000->Rebin(nRebin);
+    }
+  }
+
+  ttbar->Add(singleTop); //<-----  //note: "top" is ttbar+singleTop
+  //cout << "Warning: single top not used!\n";
+
+  if (QCDfromData)
+    totalSM->Add(dijet);
+ 
+
+  
+  TLegend* legend = new TLegend(0.701149,0.519068,0.918103,0.898305);
+  legend->SetFillColor(0);
+  legend->SetFillStyle(0);
+  legend->SetShadowColor(0);
+  legend->SetBorderSize(0);
+
+  legend->SetTextSize(0.04); 
+
+  legend->AddEntry(data,"Data","PE");
+  legend->AddEntry(W,"W","F");
+  legend->AddEntry(ttbar,"Top","F");
+  legend->AddEntry(Z,"Z/#gamma*","F");
+  legend->AddEntry(diboson,"Diboson","F");
+  legend->AddEntry(dijet,"Multi-Jet","F");
+  
+
+  //Stacking the BG histograms
+  THStack* stack = new THStack("backgrounds","backgrounds");
+
+  W->SetFillColor(kWhite);
+  Z->SetFillColor(kAzure-9);
+  ttbar->SetFillColor(kRed+1);
+  diboson->SetFillColor(kOrange);
+  dijet->SetFillColor(kYellow-9);
+
+
+  stack->Add(dijet);
+  stack->Add(diboson);
+  stack->Add(Z);
+  stack->Add(ttbar);
+  stack->Add(W);
+  
+
+
+  //TCanvas* canv = new TCanvas("c1","c1",650,600);
+  
+  TCanvas* canv = new TCanvas("c1","c1",1000,700); //("c1","c1",1000,850);
+
+  data->GetYaxis()->SetRangeUser(1e-2,5e3);
+
+  if (drawWp) data->GetYaxis()->SetRangeUser(1e-3,5e8);
+
+
+  data->GetYaxis()->SetTitle("Events");
+  data->GetXaxis()->SetMoreLogLabels();
+
+  Double_t Xmax,Xmin=0.0;
+
+  Bool_t doLogX = true;
+ 
+  //Set labels and axis ranges
+  if (histoname.find(string("El_pt")) != string::npos) {
+    data->GetXaxis()->SetTitle("Electron transverse momentum [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,3000);
+    data->GetXaxis()->SetRangeUser(0,3000);
+    Xmax = 3000.;
+  }
+  else if (histoname.find(string("_pt")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon transverse momentum [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(55,1000);
+    data->GetXaxis()->SetRangeUser(55,1000);
+    Xmax = 1000.;
+    Xmin = 55.0;
+  }
+  else if (histoname.find(string("mt")) != string::npos) {
+    data->GetXaxis()->SetTitle("Transverse mass [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,2000);
+    data->GetXaxis()->SetRangeUser(0,2000);
+    Xmax = 2000.;
+  }
+  else if (histoname.find(string("MET_iso_1jet")) != string::npos) {
+    data->GetXaxis()->SetTitle("Missing transverse energy [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,200);
+    data->GetXaxis()->SetRangeUser(0,200);
+    Xmax = 200.0;
+    Xmin = 0.0;
+    doLogX = false;
+  }
+  else if (histoname.find(string("MET")) != string::npos) {
+    data->GetXaxis()->SetTitle("Missing transverse energy [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(55,1000);
+    data->GetXaxis()->SetRangeUser(55,1000);
+    Xmax = 1000.;
+    Xmin = 55.0;
+  }
+  else if (histoname.find(string("_eta")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon #eta");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(-2.5,2.5);
+    Xmin = -2.5;
+    Xmax = 2.5;
+    doLogX = false;
+  }
+  else if (histoname.find(string("_phi")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon #phi");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(-TMath::Pi(),TMath::Pi());
+    Xmin = -TMath::Pi();
+    Xmax = TMath::Pi();
+    doLogX = false;
+  }
+  else if (histoname.find(string("_muptisol")) != string::npos) {
+    data->GetXaxis()->SetTitle("Normalized track based isolation");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,1);
+    Xmin = 0;
+    Xmax = 1;
+    doLogX = false;
+  }
+  //   else if (histoname.find(string("Mu_d0")) != string::npos) {
+  //     data->GetXaxis()->SetTitle("Muon d_{0} [mm] (wrt. primary vertex)");
+  //     data->GetYaxis()->SetTitle("Events");
+  //     //data->GetXaxis()->SetRangeUser(0,3000);
+  //     doLogX = false;
+  //   }
+  else if (histoname.find(string("Mu_z0")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon z_{0} [mm]");
+    data->GetYaxis()->SetTitle("Events");
+    //data->GetXaxis()->SetRangeUser(0,3000);
+    data->GetXaxis()->SetRangeUser(-1,1);
+    Xmin = -1;
+    Xmax = 1;
+    doLogX = false;
+  }
+  else if (histoname.find(string("PtW")) != string::npos || histoname.find(string("Wpt")) != string::npos) {
+    data->GetXaxis()->SetTitle("Reconstructed W boson p_{T} [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,3000);
+    data->GetXaxis()->SetRangeUser(0,3000);
+    Xmax = 3000.;
+  }
+  else if (histoname.find(string("cmet")) != string::npos) {
+    data->GetXaxis()->SetTitle("E_{T,calo}^{miss} [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,3000);
+    data->GetXaxis()->SetRangeUser(0,3000);
+    Xmax = 3000.;
+  }
+  else if (histoname.find(string("hMuInvMass")) != string::npos || histoname.find(string("ZvetoMass")) != string::npos) {
+    data->GetXaxis()->SetTitle("Dimuon invariant mass [GeV]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,200);
+    data->GetXaxis()->SetRangeUser(0,200);
+    Xmax = 200.0;
+    Xmin = 0.0;
+    doLogX = false;
+
+    if (histoname.find(string("ZvetoMass")) != string::npos) {
+      data->GetXaxis()->SetRangeUser(0,120);
+      data->GetXaxis()->SetRangeUser(0,120);
+      data->GetYaxis()->SetTitle("Muon pairs");
+      Xmax = 120.0;
+      Xmin = 0.0;
+    }
+  }
+  else if (histoname.find(string("DphiNeutrinoMuon")) != string::npos) {
+    data->GetXaxis()->SetTitle("#Delta#phi_{#mu,E_{T}^{miss}}");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,TMath::Pi());
+    data->GetXaxis()->SetRangeUser(0,TMath::Pi());
+    Xmax = TMath::Pi();
+    Xmin = 0.0;
+    doLogX = false;
+  }
+  else if (histoname.find(string("Njet25")) != string::npos) {
+    data->GetXaxis()->SetTitle("Number of jets");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(0,10);
+    data->GetXaxis()->SetRangeUser(0,10);
+    Xmax = 10.0;
+    Xmin = 0.0;
+    doLogX = false;
+  }
+  else if (histoname.find(string("d0")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon d_{0} [mm]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(-0.2,0.1999);
+    data->GetXaxis()->SetRangeUser(-0.2,0.1999);
+    Xmax = 0.1999;
+    Xmin = -0.2;
+    doLogX = false;
+  }
+  else if (histoname.find(string("z0")) != string::npos) {
+    data->GetXaxis()->SetTitle("Muon z_{0} [mm]");
+    data->GetYaxis()->SetTitle("Events");
+    data->GetXaxis()->SetRangeUser(-1.0,1.0);
+    data->GetXaxis()->SetRangeUser(-1.0,1.0);
+    Xmax = 1.0;
+    Xmin = -1.0;
+    doLogX = false;
+  }
+
+
+  if (doLogX)
+    canv->SetLogx();
+
+  canv->SetLogy();
+
+  //Blinding
+//   TH1* dataBlind = (TH1*)data->Clone();
+//   for (Int_t i = 0; i < dataBlind->GetNbinsX()+1; i++)
+//     if (data->GetBinLowEdge(i) > 250.0)
+//       dataBlind->SetBinContent(i,0.0);
+
+//   data = dataBlind;
+
+
+//   data->GetXaxis()->SetRangeUser(0,3000);
+//   data->GetXaxis()->SetRangeUser(0,3000);
+
+  if (drawWp) {
+    data->GetXaxis()->SetRangeUser(0.01,3e4);
+    Xmin = data->GetBinLowEdge(1);
+    Xmax = 8e3;
+  }
+
+
+  data->GetYaxis()->SetRangeUser(1e-2,3e4);
+  data->GetXaxis()->SetNoExponent();
+
+  
+  data->Draw("PE");
+  stack->Draw("Fhist same");
+  data->Draw("PE same");
+
+  legend->Draw();
+  
+
+
+  if (drawWp) {
+    Wp500->Draw("hist same");
+    Wp1000->Draw("hist same");
+    Wp3000->Draw("hist same");
+
+  }
+
+  
+  cout << "Overflow in data: " << data->GetBinContent(data->GetNbinsX()+1) << endl;
+  
+  gPad->Modified();
+
+
+
+  //Bottom left
+  // myText(0.223425,0.315476,1,"10 pb^{-1}");
+  // myText(0.207677,0.22619,1,"#sqrt{s} = 13 TeV");
+
+  //Top left
+  myText(0.2,0.76,1,"#sqrt{s} = 13 TeV, 18.5 pb^{-1}");
+  // myText(0.194458,0.765235,1,"#sqrt{s} = 13 TeV");
+
+  //Top middle
+  myText(0.2,0.87,1.1,"W' #rightarrow #mu #nu");
+  //myText(0.54,0.7647,1,"6.6 pb^{-1}");
+  //myText(0.51,0.675235,1,"#sqrt{s} = 13 TeV");
+
+  ATLAS_LABEL(0.2,0.82);
+  myText(0.32,0.82,1,"Internal");
+
+  //Top left W' plot
+//   myText(0.190945,0.857456,1,"10 pb^{-1}");
+//   myText(0.174213,0.7901,1,"#sqrt{s} = 13 TeV");
+
+  //myText(0.58477,0.866525,1,"14.4 fb^{-1}");
+  //myText(0.58477,0.866525,1,"placeholder");
+
+  //myText(0.162356,0.959746,1,period);
+
+  //Cut indicator line
+//   TLine* line = new TLine();
+//   line->DrawLine(-1,0.0,-1,totalSM->GetMaximum());
+//   TLine* line2 = new TLine();
+//   line2->DrawLine(1,0.0,1,totalSM->GetMaximum());
+}
