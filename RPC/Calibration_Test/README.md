@@ -18,13 +18,10 @@
 ### 2. Noise Level Test:  [Test](https://shaded-cannon-4d7.notion.site/Test-Discriminator-Signal-Noise-Rate-Test-a505814942d44bcf8482d070c67bea43?pvs=4)
 
 
-| Theory  | Result  |
+| Vth  | Vamp  |
 | ----------- | ----------- |
 | ![Result](/Asset/noise_Vth_result.png)| ![Result](/Asset/noise_Vamp_result.png) |
 
-![Result](/Asset/noise_Vth_result.png)
-![Example](/Asset/noise_Vth_result.png)
-![Example](/Asset/noise_Vamp_result.png)
 
 
 ### 3. Mechanical Voltage Performance Test: [Test](https://shaded-cannon-4d7.notion.site/Test-Voltage-Performance-Test-with-different-orientation-dac92808290d457ab436c18fa09304cf?pvs=4)

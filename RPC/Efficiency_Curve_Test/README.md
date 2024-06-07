@@ -45,4 +45,4 @@ Quality of Peaks is analyzed with several notable characteristic
 
 [Code | Efficiency Plot with trigger system and detector](https://shaded-cannon-4d7.notion.site/Code-Efficiency-Plot-with-trigger-system-and-detector-5355bde4fc2348618c47cd9c6af83cb1?pvs=4)
 
-[Code | Time Distribution](https://shaded-cannon-4d7.notion.site/Code-Time-Distribution-d3928160234c4ed2b0c89fe3b0b2f624?pvs=4)
+

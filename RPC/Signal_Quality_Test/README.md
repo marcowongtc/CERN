@@ -24,3 +24,4 @@ Quality of Peaks is analyzed with several notable characteristic
 | ![Example](/Asset/signal_time_width.png)      | ![Example](/Asset/signal_peak_number.png)        |
 
 
+### Notes: [Distribution](https://shaded-cannon-4d7.notion.site/Code-Time-Distribution-d3928160234c4ed2b0c89fe3b0b2f624?pvs=4)
