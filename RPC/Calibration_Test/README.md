@@ -17,7 +17,8 @@
 
 ### 2. Noise Level Test:  [Test](https://shaded-cannon-4d7.notion.site/Test-Discriminator-Signal-Noise-Rate-Test-a505814942d44bcf8482d070c67bea43?pvs=4)
 
-| $V_{th}$  | $V_{amp}$  |
+
+| Theory  | Result  |
 | ----------- | ----------- |
 | ![Result](/Asset/noise_Vth_result.png)| ![Result](/Asset/noise_Vamp_result.png) |
 
