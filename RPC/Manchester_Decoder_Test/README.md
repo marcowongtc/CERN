@@ -41,7 +41,11 @@ root [1] tree->Print()
 
 Adjust the setting in the main function in `Main.C`:
 * **string merged_file_name** and **string treename**: The names of the input data file and its tree (which are set by `csv_to_root.C`)
-* **tree->SetBranchAddress("XXX", &XXX_ch)** etc: The channel names -- decode_ch is the channel containing the encoded word, injected_signal_ch is the channel for the injected signal (![see here](https://gitlab.cern.ch/kfung/rpc_upgrade_manchester/-/blob/master/example_picture/injected_signal.png)), clock_ch is the channel for the data clock, and disc_signal_ch is the channel for the discriminator signal (![see here](https://gitlab.cern.ch/kfung/rpc_upgrade_manchester/-/blob/master/example_picture/discriminator_signal.png)). The names are simply "CH1", "CH2", "CH3" and "CH4" (as defined in `csv_to_root.C`), but the order is subject to change.
+* **tree->SetBranchAddress("XXX", &XXX_ch)** etc: The channel names -- decode_ch is the channel containing the encoded word, injected_signal_ch is the channel for the injected signal 
+![see here](/RPC/Manchester_Decoder_Test/example_picture/injected_signal.png)
+clock_ch is the channel for the data clock, and disc_signal_ch is the channel for the discriminator signal  
+![see here](/RPC/Manchester_Decoder_Test/example_picture/discriminator_signal.png)
+ The names are simply "CH1", "CH2", "CH3" and "CH4" (as defined in `csv_to_root.C`), but the order is subject to change.
 
 The decode() function is the major function for decoding the words. It takes in the following parameters:
 * **TTree \*tree**, **int& event_number**: the variables for the tree and event number defined previously. Usually you don't have to change these
@@ -71,11 +75,14 @@ The screen output will also be saved to a txt file (if setting "writeScreenOutpu
 ## Decode logic
 The main code for the decoding is the `decode()` function in `Main.C`. The logic is to locate the transitions separated by one bit size (~3-4ns).
 
-First, the bit size will be calculated. This is done by calculating the average period of the oscillation in the region where no transmission is occured. (![see here](https://gitlab.cern.ch/kfung/rpc_upgrade_manchester/-/blob/master/example_picture/bit_size.png))
+First, the bit size will be calculated. This is done by calculating the average period of the oscillation in the region where no transmission is occured. ![see here](/RPC/Manchester_Decoder_Test/example_picture/bit_size.png)
 
-Then, if the data clock is available, it will be used to determine the location where the reset occurs (each separated by 50 ns). (![see here](https://gitlab.cern.ch/kfung/rpc_upgrade_manchester/-/blob/master/example_picture/clock.png)) The signature of a reset is two consecutive local minima. The duration of the reset is also calculated. If the clock is not available, the code will estimate the reset duration by aligning the end of the last bit of the word to the start of the "no-signal region".
+Then, if the data clock is available, it will be used to determine the location where the reset occurs (each separated by 50 ns). 
+![see here](/RPC/Manchester_Decoder_Test/example_picture/clock.png) 
+The signature of a reset is two consecutive local minima. The duration of the reset is also calculated. If the clock is not available, the code will estimate the reset duration by aligning the end of the last bit of the word to the start of the "no-signal region".
 
-The start of the transmission is located by finding the Manchester error, which contains a much longer zero which cannot be seen in any other regions. The transition is found by adding one bit size to the previous transition. An up-to-down transition is decoded as "0", while a down-to-up transition is decoded as "1". (![see here](https://gitlab.cern.ch/kfung/rpc_upgrade_manchester/-/blob/master/example_picture/signal_word.png))
+The start of the transmission is located by finding the Manchester error, which contains a much longer zero which cannot be seen in any other regions. The transition is found by adding one bit size to the previous transition. An up-to-down transition is decoded as "0", while a down-to-up transition is decoded as "1". 
+![see here](/RPC/Manchester_Decoder_Test/example_picture/signal_word.png)
 
 ## Other useful files
 `draw.C` is a simple code to draw the difference channels for visualization. The starting, ending time, channel and event number to be drawn can be set in the arguments. If you want to draw some vertical lines (e.g. the time of each transition) for easier visualization, you can invlude the times in **vector\<float\> draw_red_vertical** and **vector\<float\> draw_green_vertical**. It can be easily run in `<csv_directory>` by
@@ -90,4 +97,9 @@ root -l '../draw.C(-50, 50, "CH1", 0)'
 `analysis.py` is a simple python script to draw different distributions to pdf files. Open the script, set the file names and the **actions** list, then run it in `<csv_directory>` by
 ```
 python ../analysis.py
+
 ```
+
+## Notes
+
+### [Principle](https://shaded-cannon-4d7.notion.site/Learn-Mechanism-of-Analog-to-Digital-Conversion-and-Time-signal-registration-73d759847ec74104be43cf5d04bf4fb9?pvs=4) & [Code](https://shaded-cannon-4d7.notion.site/Code-Algorithm-of-decoding-Manchester-Signal-de76deb8d5ae4703ade73e84e7fcd66a?pvs=4)

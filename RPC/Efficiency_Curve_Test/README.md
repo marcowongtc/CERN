@@ -1,19 +1,36 @@
-## RPC Muon Spectrometer Efficiency 
-Here we measure the efficiency of the RPC Muon Spectrometer by Counting the number of muon detected by the scintillator and the newly upgraded RPC.   
+## Efficiency Curve Test
+### System
+![Trigger System](/Asset/scintillator_trigger_system.png)
+
+***
+
+### Signal Detection & Efficiency Calculation
+Here we measure the efficiency curve of the RPC Muon Spectrometer by Counting the number of muon detected by the scintillator and the newly upgraded RPC simultaneously and number of muon missed by RPC.
+
+![Signal Detection](/Asset/signal_detection.png)
+
 The number of muon is obtained by counting the detector signals with exceeding a threshold voltage $V_{th}$
 
-> #### Efficiency ε
->$ε = N_{detector} / N_{ScintCoinc}$
-> #### Error Bar δ
->$δ = \sqrt{ε(1-ε)/N_{ScintCoinc}}$
 
+![Efficiency Calculation](/Asset/efficiency_calculation.png)
+> #### Efficiency ε
+>$ε = N_{coinc} / (N_{coinc} + N_{miss})$
+> #### Error Bar δ
+>$δ = \sqrt{ε(1-ε)/(N_{coinc} + N_{miss})}$
+
+***
+
+### Efficiency Curve Plotting
 
 Efficiency is plotted against the High Voltage applied HV with three working points `3WP`
 >- to uncover possible defects in RPC
 >- to learn the RPC science | avalanche, electronics, detector physics  
 
+![Efficiency Curve](/Asset/Efficiency_3WP.png)
 
-## Efficiency Counting Update | Analyzing the Quality of Peaks
+***
+
+## Cont: [Signal Quality Test](/RPC/Signal_Quality_Test/) | Further investigation on Efficiency Algorithm  
 
 Quality of Peaks is analyzed with several notable characteristic 
 > - Peak Maximum
