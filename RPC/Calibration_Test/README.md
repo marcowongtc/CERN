@@ -21,6 +21,8 @@
 | ----------- | ----------- |
 | ![Example](/Asset/noise_Vth_result.png)      | ![Example](/Asset/noise_Vamp_result.png)        |
 
+![Example](/Asset/noise_Vth_result.png)
+![Example](/Asset/noise_Vamp_result.png)
 
 
 ### 3. Mechanical Voltage Performance Test: [Test](https://shaded-cannon-4d7.notion.site/Test-Voltage-Performance-Test-with-different-orientation-dac92808290d457ab436c18fa09304cf?pvs=4)
