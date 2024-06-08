@@ -1,5 +1,5 @@
 ## CERN
-This is the repository for CERN summer student research internship program in June to August 2023.  
+This is the repository for CERN summer student research internship program in June to August 2023 from Tsz Chun (Marco) Wong.  
 
 
 ## Muon Resistive Plate Chamber Project ([Here](./RPC/README.md))
